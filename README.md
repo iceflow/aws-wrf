@@ -134,7 +134,7 @@ $ pcluster create WRFcluster
 
 WRF依赖于gfortan编译器和gcc、cpp的库，在此基础之上依赖于基本库NetCDF和用于并行计算的库MPICH，在运行WRF任务之前，还需要通过WPS（WRF Pre-processing System）做数据的预处理。所以在WRF的安装过程中，首先要更新依赖的编译器和库，然后安装NetCDF和MPICH，然后安装和编译WRF，设定好目录后安装和编译WPS。
 
-如果使用intel编译环境，参考[intel compiler](lixy093/aws-wrf/intel-compiler/)
+如果使用intel编译环境，参考[intel compiler](intel-compiler/)
 
 
 ## 2.1. 登录主节点
