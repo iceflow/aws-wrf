@@ -167,7 +167,7 @@ sh scripts/netcdf_install.sh
 sh scripts/mpich_install.sh
 ```
 
-MPICH 3.0.4有一个bug，集群超过一定规模后会job会卡住，建议升级至mpich-3.3.2(https://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz)
+MPICH 3.0.4有一个bug，集群超过一定规模后会job会卡住，建议升级至mpich-3.3.2(修改scripts/mpich_install.sh，将mpich下载地址改为https://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz)
 
 ## 2.6. 安装 WRF 4.0
 ```
