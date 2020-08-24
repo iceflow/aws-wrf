@@ -79,9 +79,9 @@ Compute Subnet ID [subnet-0bfbfc0271a9cea5b]: 1
 ```
 
 ## 1.5. 创建S3存储桶
-打开AWS控制台，选择S3服务，创建一个S3存储桶(比如s3://nwcdworkshop)，用于存储集群运行产生的数据。
+打开AWS控制台，选择S3服务，创建一个S3存储桶(比如s3://nwcdworkshop)，用于存储集群运行产生的数据。  
+下载计算节点运行的[post_install脚本文件](https://wrf-softwares.s3.cn-northwest-1.amazonaws.com.cn/pcluster_postinstall.sh)，上传到存储桶中本例s3://nwcdworkshop/pcluster/pcluster_postinstall.sh， 由于WRF不能得益于超线程，通过post_instal脚本关闭EC2实例的超线程，按照物理核来运行。  
 
-下载计算节点运行的[post_install脚本文件](https://wrf-softwares.s3.cn-northwest-1.amazonaws.com.cn/pcluster_postinstall.sh)，上传到存储桶中本例s3://nwcdworkshop/pcluster/pcluster_postinstall.sh
 
 ## 1.6. 编辑parallelcluster配置
 使用以下命令编辑ParallelCluster配置
