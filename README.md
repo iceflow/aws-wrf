@@ -1,7 +1,7 @@
 # 1.安装配置ParallelCluster
 
 ## 1.1. 管理机器配置
-准备一台管理服务器，用于ParallelCluster的集群配置和管理，对性能没有高要求，使用T系列EC2即可，或者直接使用自己的工作站笔记本都可以。
+准备一台管理服务器，用于ParallelCluster的集群配置和管理，对性能没有高要求，使用T系列EC2即可，或者直接使用自己的工作站笔记本都可以。  
 要求安装awscli、python（推荐python3）和pip(推荐pip3)。
 
 ## 1.2. 安装ParallelCluster
@@ -19,7 +19,7 @@
 $ aws configure
 AWS Access Key ID [None]: ABCD***********
 AWS Secret Access Key [None]: wJalrX********
-Default region name [us-east-1]: cn-northwest-1
+Default region name [us-east-1]: us-west-2
 Default output format [None]: json
 ```
 
@@ -91,7 +91,7 @@ $ vim ~/.parallelcluster/config
 可以看到上一步初始化时VPC、子网等信息都在此配置文件中，依然沿用之前的设置；其他根据需求做相应配置。
 ```
 [aws]
-aws_region_name = cn-northwest-1
+aws_region_name = us-west-2
 
 [global]
 cluster_template = default
