@@ -296,7 +296,8 @@ $ vim configure.wps
 找到其中指定WRF路径的两行，修改为
 
 WRF_DIR = ../../WRF/WRF
-编译WPS
+
+ 编译WPS
 
 ```
 $ source ~/.bashrc
@@ -304,9 +305,9 @@ $ ./compile 2>&1 | tee compile.log
 ```
 如果安装成功则，能看到WPS目录下有如下三个文件
 
-exe -> geogrid/src/geogrid.exe
-exe -> ungrib/src/ungrib.exe
-exe -> metgrid/src/metgrid.exe
+  geogrid.exe -> geogrid/src/geogrid.exe
+  ungrib.exe -> ungrib/src/ungrib.exe
+  metgrid.exe -> metgrid/src/metgrid.exe
 到此，我们完成WRF的全部安装过程。
 
  
