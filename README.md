@@ -306,8 +306,11 @@ $ ./compile 2>&1 | tee compile.log
 如果安装成功则，能看到WPS目录下有如下三个文件
 
   geogrid.exe -> geogrid/src/geogrid.exe
+  
   ungrib.exe -> ungrib/src/ungrib.exe
+  
   metgrid.exe -> metgrid/src/metgrid.exe
+  
 到此，我们完成WRF的全部安装过程。
 
  
@@ -435,4 +438,12 @@ $ qsub job.sh
 
 任务提交后，ParallelCluster会根据任务需求自动启动计算实例，添加到集群中，并行执行任务；任务完成后，一段时间内如果没有任务运行在计算节点，ParallelCluster会将计算节点终止，节约成本。
 
+
+# 参考文档
+使用 AWS ParallelCluster 轻松构建 WRF 集群进行气象预报
+https://aws.amazon.com/cn/blogs/china/use-aws-parallelcluster-easily-build-wrf-for-weatherreport/
+AWS HPC Workshop - 	WRF on AWS
+https://github.com/aws-samples/aws-hpc-workshops/blob/master/README-WRF.rst#download-and-install-the-intel-compiler
+AWS ParallelCluster配置参考
+https://docs.aws.amazon.com/parallelcluster/latest/ug/cluster-definition.html
 
