@@ -4,7 +4,7 @@
 准备一台管理服务器，用于ParallelCluster的集群配置和管理，对性能没有高要求，使用T系列EC2即可，或者直接使用自己的工作站笔记本都可以。
 要求安装awscli、python（推荐python3）和pip(推荐pip3)。
 
-1.2. 安装ParallelCluster
+## 1.2. 安装ParallelCluster
 在管理服务器上安装ParallelCluster
 如果已经有 pip 和支持的 Python 版本，则可通过使用以下命令安装 AWS ParallelCluster。如果您安装了 Python 3 版本，我们建议您使用 pip3 命令。
  ```
@@ -13,7 +13,7 @@
 环境配置及安装可参考(https://docs.aws.amazon.com/zh_cn/parallelcluster/latest/ug/install.html)
  
  
-1.3. 配置AWS IAM Credentials
+## 1.3. 配置AWS IAM Credentials
 准备一个高权限AWS IAM用户（比如adiministrator），创建访问密钥的ID与私有访问密钥（Access Key与Secret Key），将之配置到管理服务器里用于配置AWS实例的访问权限。
 ```
 $ aws configure
@@ -23,7 +23,7 @@ Default region name [us-east-1]: cn-northwest-1
 Default output format [None]: json
 ```
 
-1.4. 初始化ParallelCluster
+## 1.4. 初始化ParallelCluster
 配置好权限后，使用以下命令开始ParallelCluster的初始化。
 ```
 $ pcluster configure
@@ -52,12 +52,12 @@ Acceptable Values for Master Subnet ID:
 Master Subnet ID []: subnet-0bfbfc0271a9cea5b //选择子网
 ```
 
-1.5. 创建S3存储桶
+## 1.5. 创建S3存储桶
 打开AWS控制台，选择S3服务，创建一个S3存储桶(比如s3://nwcdworkshop)，用于存储集群运行产生的数据。
 
 下载计算节点运行的脚本文件(下载链接：https://wrf-softwares.s3.cn-northwest-1.amazonaws.com.cn/pcluster_postinstall.sh)，上传到存储桶中(s3://nwcdworkshop/pcluster/pcluster_postinstall.sh)
 
-1.6. 编辑parallelcluster配置
+## 1.6. 编辑parallelcluster配置
 使用以下命令编辑ParallelCluster配置
 ```
 $ vim ~/.parallelcluster/config
@@ -112,41 +112,41 @@ ssh = ssh {CFN_USER}@{MASTER_IP} {ARGS}
 
 脚本分为AWS区域、集群信息配置、自动扩展设置、共享数据卷设置、VPC与子网设置等几个部分。重点关注以下几个参数：
 
-post_install 设置的是集群节点启动时运行的脚本位置，修改YOUR_S3_BUCKET_NAME为你自己的存储桶名称，由于WRF不能得益于超线程，因此这个脚本中会关闭EC2实例的超线程，按照物理核来运行。
-s3_read_write_resource 设置的是集群访问的S3存储桶，修改YOUR_S3_BUCKET_NAME为你自己的存储桶名称。
-compute_instance_type 设置的是计算节点的类型，建议尽可能使用较大的实例类型，在并行计算场景中提高更多的效率，此处设定为18xlarge；默认新账户这个实例类型limit较少，建议提前开support case提高limit
-master_instance_type 设置的是主节点的类型，主节点用于安装软件、下载数据，不参与并行计算，所以不需要太大，此处设定为xlarge
-max_queue_size 设置的是集群计算节点的数量上限，可以根据需求更改，此处设置为5台
-scheduler 设置的是批处理计划，此处使用torque，还可以根据您的习惯选择sge或slurm
-volume_size 设置的是共享EBS卷的大小，其他节点会NFS挂载到这个卷的文件系统中，由于数据量较大，建议设置大一些，此处设置为2000G
-使用单可用区部署，并使用Placement Group可以降低集群节点间通信的延迟，提高并行计算效率，在此脚本中均已设置。
+   * post_install 设置的是集群节点启动时运行的脚本位置，修改YOUR_S3_BUCKET_NAME为你自己的存储桶名称，由于WRF不能得益于超线程，因此这个脚本中会关闭EC2实例的超线程，按照物理核来运行。
+   * s3_read_write_resource 设置的是集群访问的S3存储桶，修改YOUR_S3_BUCKET_NAME为你自己的存储桶名称。
+   * compute_instance_type 设置的是计算节点的类型，建议尽可能使用较大的实例类型，在并行计算场景中提高更多的效率，此处设定为18xlarge；默认新账户这个实例类型limit较少，建议提前开support case提高limit
+   * master_instance_type 设置的是主节点的类型，主节点用于安装软件、下载数据，不参与并行计算，所以不需要太大，此处设定为xlarge
+   * max_queue_size 设置的是集群计算节点的数量上限，可以根据需求更改，此处设置为5台
+   * scheduler 设置的是批处理计划，此处使用torque，还可以根据您的习惯选择sge或slurm
+   * volume_size 设置的是共享EBS卷的大小，其他节点会NFS挂载到这个卷的文件系统中，由于数据量较大，建议设置大一些，此处设置为2000G
+   * 使用单可用区部署，并使用Placement Group可以降低集群节点间通信的延迟，提高并行计算效率，在此脚本中均已设置。
 
 
 
-1.7. 创建ParallelCluster集群
+## 1.7. 创建ParallelCluster集群
 ```
 $ pcluster create WRFcluster
 ```
 使用命令创建集群，并等待集群创建完成。如果集群创建失败，请检查相应Region的EC2限制是否小于设定的集群最大节点数，点击EC2界面左边“限制”查看。如果受限于EC2 limit，可以开support case提高limit，或者修改设置降低最大节点数。
 
  
-2. 配置WRF软件和环境
+# 2. 配置WRF软件和环境
 
 WRF依赖于gfortan编译器和gcc、cpp的库，在此基础之上依赖于基本库NetCDF和用于并行计算的库MPICH，在运行WRF任务之前，还需要通过WPS（WRF Pre-processing System）做数据的预处理。所以在WRF的安装过程中，首先要更新依赖的编译器和库，然后安装NetCDF和MPICH，然后安装和编译WRF，设定好目录后安装和编译WPS。
 
-2.1. 登录主节点
+## 2.1. 登录主节点
 打开AWS控制台，选择EC2服务，找到集群主节点（默认标签为Master），ssh登录。
 ```
 $ pcluster ssh WRFcluster
 ```
 
-2.2. 更新并安装gcc编译器和jasper、libpng依赖库
+## 2.2. 更新并安装gcc编译器和jasper、libpng依赖库
 ```
 $ sudo yum upgrade -y \
 && sudo yum install gcc64-gfortran.x86_64 libgfortran.x86_64 jasper jasper-libs.x86_64 jasper-devel.x86_64 libpng-devel.x86_64 -y
 ```
 
-2.3. 下载代码仓库并进入相应目录
+## 2.3. 下载代码仓库并进入相应目录
 代码仓库托管在GitHub，包含安装脚本等资源，建议下载到共享卷目录/shared 下。
 ```
 $ cd /shared
@@ -154,19 +154,19 @@ $ git clone https://github.com/BlastShadowsong/wrf-cluster-on-aws-pcluster.git
 $ cd wrf-cluster-on-aws-pcluster/
 ```
 
-2.4. 安装 NetCDF 4.1.3
+## 2.4. 安装 NetCDF 4.1.3
 ```
 sh scripts/netcdf_install.sh
 ```
 
-2.5. 安装 MPICH 3.0.4
+## 2.5. 安装 MPICH 3.0.4
 ```
 sh scripts/mpich_install.sh
 ```
 
 MPICH 3.0.4有一个bug，集群超过一定规模后会job会卡住，建议升级至mpich-3.3.2(https://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz)
 
-2.6. 安装 WRF 4.0
+## 2.6. 安装 WRF 4.0
 ```
 sh scripts/wrf_install.sh
 ```
@@ -236,7 +236,7 @@ build completed: Fri Jul 19 12:21:41 UTC 2019
 ==========================================================================
 ```
 
-2.7. 安装 WPS 4.0
+## 2.7. 安装 WPS 4.0
 ```
 $ sh scripts/wps_install.sh
 ```
@@ -307,10 +307,10 @@ exe -> metgrid/src/metgrid.exe
 到此，我们完成WRF的全部安装过程。
 
  
-3. 数据准备与WRF运行
+# 3. 数据准备与WRF运行
 WRF任务运行之前，需要准备数据并进行预处理，数据包括静态地理数据和实时气象数据，都可以从NCEP的官网获取；之后分别用WPS的geogrid、ungrib和metgrid进行数据预处理，产生相应的文件，之后就可以执行WRF任务了。
 
-3.1. 下载静态地理数据
+## 3.1. 下载静态地理数据
 在/shared 目录下新建文件夹Build_WRF，下载到其中，Global可从官方网站获取：http://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html，国内从中国镜像站获取：https://wrf-data.s3.cn-north-1.amazonaws.com.cn/geog_high_res_mandatory.tar.gz
 ```
 $ cd /shared
@@ -326,7 +326,7 @@ $ vim namelist.wps
 $ geog_data_path ='/shared/Build_WRF/WPS_GEOG/'
 ```
 
-3.2. 下载实时气象数据
+## 3.2. 下载实时气象数据
 实时气象数据可从官方网站获取：ftp://ftpprd.ncep.noaa.gov/pub/data/nccf/com/gfs/prod 考虑到NOAA官方数据在海外，推荐使用AWS海外账户来就近分析，节省数据迁移时间。
 
 在 /shared/Build_WRF 目录下创建一个目录 DATA，将实时数据下载到 DATA 中。 本例中下载2020年7月15日12点起未来12小时（f000、f006、f012共3个数据作为测试数据）
@@ -343,7 +343,7 @@ $ mv gfs.t00z.pgrb2.0p50.f012 GFS_12h
 ```
 如果需要未来三天半的数据，则下载f000、f006、f012到f084共计15个数据作为测试数据
 
-3.3. 运行geogrid
+## 3.3. 运行geogrid
 转到WPS目录中，运行geogrid
 ```
 $ cd /shared/WPS/WPS
@@ -351,7 +351,7 @@ $ ./geogrid.exe>&log.geogrid
 ```
 这一步运行成功的标志是创建了 geo_em.* 文件
 
-3.4. 运行ungrib
+## 3.4. 运行ungrib
 运行ungrib，首先修改链接到GFS和Vtables的正确位置
 ```
 $ ./link_grib.csh /shared/Build_WRF/DATA/
@@ -366,22 +366,22 @@ end_date   = '2020-07-19_00:00:00'
 $ ./ungrib.exe
 ```
 
-3.5. 运行metgrid
+## 3.5. 运行metgrid
 ```
 $ ./metgrid.exe>&log.metgrid
 ```
 这一步运行成功的标志是创建了 met_em* 文件
 
-3.6. 复制数据到WRF工作目录
+## 3.6. 复制数据到WRF工作目录
 进入WRF目录，将 met_em.* 文件复制到工作目录
 ```
 $ cd /shared/WRF/WRF/run $ cp /shared/WPS/WPS/met_em* /shared/WRF/WRF/run/
 ```
 
-3.7. 修改namelist.input文件
+## 3.7. 修改namelist.input文件
 修改 namelist.input 文件中的开始和结束时间，每一行三项设置为相同时间，开始和结束时间与实时数据相契合；修改 num_metgrid_levels 参数为34，与实时数据相契合。
 
-3.8. 运行real程序
+## 3.8. 运行real程序
 ```
 $ cd /shared/WRF/WRF/run
 $ ./real.exe
@@ -390,7 +390,7 @@ $ ./real.exe
 
 $ tail rsl.error.0000
 
-3.9. 运行WRF
+## 3.9. 运行WRF
 可自行修改 np 参数，但要小于主节点实例的物理核数。
 ```
 $ mpirun -np 8 ./wrf.exe
@@ -398,10 +398,10 @@ $ mpirun -np 8 ./wrf.exe
 运行成功的标志是 rsl.out.0000 文件中有 SUCCESS结尾，并生成 wrfout* 文件。
 
  
-4. 提交WRF并行计算任务
+# 4. 提交WRF并行计算任务
 现在我们已经能通过 mpirun 运行WRF任务，但直接执行是运行在主节点上，接下来我们通过任务脚本和torque命令，将WRF任务提交到计算节点并行完成。
 
-4.1. 制作任务脚本
+## 4.1. 制作任务脚本
 ```
 $ vim job.sh
 ```
@@ -422,7 +422,7 @@ date
 ```
 其中 PBS -N 为任务名称，-l 控制并行节点数和每个节点的计算核数，-o 和 -e 为结果日志和错误日志的输出位置。这些参数都可以结合实际需求灵活更改。
 
-4.2. 提交任务到计算节点
+## 4.2. 提交任务到计算节点
 通过以下命令提交任务
 ```
 $ qsub job.sh
