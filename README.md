@@ -55,7 +55,7 @@ Master Subnet ID []: subnet-0bfbfc0271a9cea5b //选择子网
 ## 1.5. 创建S3存储桶
 打开AWS控制台，选择S3服务，创建一个S3存储桶(比如s3://nwcdworkshop)，用于存储集群运行产生的数据。
 
-下载计算节点运行的脚本文件(下载链接：https://wrf-softwares.s3.cn-northwest-1.amazonaws.com.cn/pcluster_postinstall.sh)，上传到存储桶中(s3://nwcdworkshop/pcluster/pcluster_postinstall.sh)
+下载计算节点运行的[post_install脚本文件](https://wrf-softwares.s3.cn-northwest-1.amazonaws.com.cn/pcluster_postinstall.sh)，上传到存储桶中本例s3://nwcdworkshop/pcluster/pcluster_postinstall.sh
 
 ## 1.6. 编辑parallelcluster配置
 使用以下命令编辑ParallelCluster配置
@@ -133,6 +133,9 @@ $ pcluster create WRFcluster
 # 2. 配置WRF软件和环境
 
 WRF依赖于gfortan编译器和gcc、cpp的库，在此基础之上依赖于基本库NetCDF和用于并行计算的库MPICH，在运行WRF任务之前，还需要通过WPS（WRF Pre-processing System）做数据的预处理。所以在WRF的安装过程中，首先要更新依赖的编译器和库，然后安装NetCDF和MPICH，然后安装和编译WRF，设定好目录后安装和编译WPS。
+
+如果使用intel编译环境，参考[intel compiler](lixy093/aws-wrf/intel-compiler/)
+
 
 ## 2.1. 登录主节点
 打开AWS控制台，选择EC2服务，找到集群主节点（默认标签为Master），ssh登录。
