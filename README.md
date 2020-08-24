@@ -442,10 +442,12 @@ $ qsub job.sh
 
 
 # 参考文档
-使用 AWS ParallelCluster 轻松构建 WRF 集群进行气象预报
-https://aws.amazon.com/cn/blogs/china/use-aws-parallelcluster-easily-build-wrf-for-weatherreport/
-AWS HPC Workshop - 	WRF on AWS
-https://github.com/aws-samples/aws-hpc-workshops/blob/master/README-WRF.rst#download-and-install-the-intel-compiler
-AWS ParallelCluster配置参考
-https://docs.aws.amazon.com/parallelcluster/latest/ug/cluster-definition.html
+使用 AWS ParallelCluster 轻松构建 WRF 集群进行气象预报  
+https://aws.amazon.com/cn/blogs/china/use-aws-parallelcluster-easily-build-wrf-for-weatherreport/  
+AWS HPC Workshop - 	WRF on AWS  
+https://github.com/aws-samples/aws-hpc-workshops/blob/master/README-WRF.rst#download-and-install-the-intel-compiler  
+
+AWS ParallelCluster配置参考  
+https://docs.aws.amazon.com/parallelcluster/latest/ug/cluster-definition.html  
+
 
