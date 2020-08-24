@@ -32,24 +32,50 @@ $ pcluster configure
 跟着Configure 向导的步骤，选择区域、VPC、子网、密钥等资源，创建集群配置
 
 ```
-Cluster Template [default]: WRFcluster //集群名
-Acceptable Values for AWS Region ID:
-    cn-north-1
-    cn-northwest-1
-AWS Region ID []: cn-northwest-1 //选择部署区域，示例选择的是宁夏区域
-VPC Name [public]: prod //命名VPC
-Acceptable Values for Key Name:
-    hpc-key
-    web-key
-Key Name []: hpc-key //选择一个密钥，这个可以在EC2创建过程中创建
-Acceptable Values for VPC ID:
-    vpc-503dce39
-    vpc-05905e5dc43199178
-VPC ID []: vpc-05905e5dc43199178 //选择一个VPC
-Acceptable Values for Master Subnet ID:
-    subnet-0bfbfc0271a9cea5b
-    subnet-40a46129
-Master Subnet ID []: subnet-0bfbfc0271a9cea5b //选择子网
+WARNING: Configuration file /home/ec2-user/.parallelcluster/config will be overwritten.
+Press CTRL-C to interrupt the procedure.
+
+
+Allowed values for AWS Region ID:
+1. sa-east-1
+2. us-east-1
+3. us-east-2
+4. us-west-1
+5. us-west-2
+AWS Region ID [us-west-2]: 5
+Allowed values for EC2 Key Pair Name:
+1. pcluster_us
+EC2 Key Pair Name [pcluster_us]: 1
+Allowed values for Scheduler:
+1. sge
+2. torque
+3. slurm
+4. awsbatch
+Scheduler [torque]: 2
+Allowed values for Operating System:
+1. alinux
+2. alinux2
+3. centos6
+4. centos7
+5. ubuntu1604
+6. ubuntu1804
+Operating System [alinux]: 1
+Minimum cluster size (instances) [1]: 1
+Maximum cluster size (instances) [30]: 30
+Master instance type [m5.xlarge]: m5.xlarge
+Compute instance type [c5.18xlarge]: c5.18xlarge
+Automate VPC creation? (y/n) [n]: n
+Allowed values for VPC ID:
+1. vpc-7efe4806 | 4 subnets inside
+2. vpc-05905e5dc43199178 | ParallelClusterVPC-20200720130552 | 3 subnets inside
+VPC ID [vpc-05905e5dc43199178]: 2
+Automate Subnet creation? (y/n) [y]: n
+Allowed values for Master Subnet ID:
+1. subnet-0bfbfc0271a9cea5b | ParallelClusterPublicSubnet | Subnet size: 4096
+Master Subnet ID [subnet-0bfbfc0271a9cea5b]: 1
+Allowed values for Compute Subnet ID:
+1. subnet-0bfbfc0271a9cea5b | ParallelClusterPublicSubnet | Subnet size: 4096
+Compute Subnet ID [subnet-0bfbfc0271a9cea5b]: 1
 ```
 
 ## 1.5. 创建S3存储桶
