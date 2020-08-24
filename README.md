@@ -320,7 +320,7 @@ $ ./compile 2>&1 | tee compile.log
 WRF任务运行之前，需要准备数据并进行预处理，数据包括静态地理数据和实时气象数据，都可以从NCEP的官网获取；之后分别用WPS的geogrid、ungrib和metgrid进行数据预处理，产生相应的文件，之后就可以执行WRF任务了。
 
 ## 3.1. 下载静态地理数据
-在/shared 目录下新建文件夹Build_WRF，下载到其中，Global可从官方网站获取：http://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html，国内从中国镜像站获取：https://wrf-data.s3.cn-north-1.amazonaws.com.cn/geog_high_res_mandatory.tar.gz
+在/shared 目录下新建文件夹Build_WRF，下载到其中，Global可从官方网站获取：http://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html ，国内从中国镜像站获取： https://wrf-data.s3.cn-north-1.amazonaws.com.cn/geog_high_res_mandatory.tar.gz
 ```
 $ cd /shared
 $ mkdir Build_WRF
@@ -442,12 +442,15 @@ $ qsub job.sh
 
 
 # 参考文档
-使用 AWS ParallelCluster 轻松构建 WRF 集群进行气象预报  
+1. 使用 AWS ParallelCluster 轻松构建 WRF 集群进行气象预报  
 https://aws.amazon.com/cn/blogs/china/use-aws-parallelcluster-easily-build-wrf-for-weatherreport/  
-AWS HPC Workshop - 	WRF on AWS  
+2. AWS HPC Workshop - 	WRF on AWS  
 https://github.com/aws-samples/aws-hpc-workshops/blob/master/README-WRF.rst#download-and-install-the-intel-compiler  
-
-AWS ParallelCluster配置参考  
+3. AWS ParallelCluster配置参考  
 https://docs.aws.amazon.com/parallelcluster/latest/ug/cluster-definition.html  
-
-
+4. How to Compile WRF (From NCAR)：  
+http://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php
+5. WRF 官网地理数据下载：  
+http://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html
+6. NCEP 气象实时数据下载：  
+ftp://ftpprd.ncep.noaa.gov/pub/data/nccf/com/gfs/prod
