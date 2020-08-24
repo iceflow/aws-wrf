@@ -6,7 +6,7 @@ yum install -y gcc gcc-c++ csh wget time cmake unzip git libstdc++-devel libstdc
 
 # 2.install intel compiler
 ```
-wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/16225/tar zxvf parallel_studio_xe_2020_cluster_edition.tgz
+wget http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/16225/parallel_studio_xe_2020_cluster_edition.tgz
 tar zxvf parallel_studio_xe_2020_cluster_edition.tgz
 cd parallel_studio_xe_2020_cluster_edition
 ./install.sh
