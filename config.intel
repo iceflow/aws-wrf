@@ -25,14 +25,14 @@ cluster_type = spot
 ebs_settings = ebs
 extra_json = { "cluster" : { "cfn_scheduler_slots" : "cores" } }
 enable_intel_hpc_platform = true
-post_install = s3://nwcdworkshop/pcluster/intel_postinstall.sh
-s3_read_write_resource = arn:aws:s3:::nwcdworkshop/*
+post_install = s3://存储桶名称/目录/intel_postinstall.sh
+s3_read_write_resource = arn:aws:s3:::存储桶名称/*
 
 [scaling WRF-ASG]
 scaledown_idletime = 5
 
 [ebs ebs]
-ebs_snapshot_id = snap-0518123be69f74a69
+#ebs_snapshot_id = snap-0518123be69f74a69
 volume_type = gp2
 volume_size = 2000
 
