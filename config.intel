@@ -1,0 +1,44 @@
+[aws]
+aws_region_name = us-west-2
+
+[global]
+cluster_template = default
+update_check = true
+sanity_check = true
+
+[cluster default]
+key_name = pcluster_us
+base_os = centos7
+scheduler = torque
+master_instance_type = m5.xlarge
+compute_instance_type = c5.18xlarge
+initial_queue_size = 1
+maintain_initial_size = false
+max_queue_size = 30
+vpc_settings = default
+master_root_volume_size = 200
+compute_root_volume_size = 100
+scaling_settings = WRF-ASG
+placement = cluster
+placement_group = DYNAMIC
+cluster_type = spot
+ebs_settings = ebs
+extra_json = { "cluster" : { "cfn_scheduler_slots" : "cores" } }
+enable_intel_hpc_platform = true
+post_install = s3://nwcdworkshop/pcluster/intel_postinstall.sh
+s3_read_write_resource = arn:aws:s3:::nwcdworkshop/*
+
+[scaling WRF-ASG]
+scaledown_idletime = 5
+
+[ebs ebs]
+ebs_snapshot_id = snap-0518123be69f74a69
+volume_type = gp2
+volume_size = 2000
+
+[vpc default]
+vpc_id = vpc-05905e5dc43199178
+master_subnet_id = subnet-0bfbfc0271a9cea5b
+
+[aliases]
+ssh = ssh {CFN_USER}@{MASTER_IP} {ARGS}
